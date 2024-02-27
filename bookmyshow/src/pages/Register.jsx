@@ -1,0 +1,87 @@
+import React from 'react'
+import { Button, Form, Input, message } from 'antd'
+import { Link } from 'react-router-dom'
+import { RegisterUser } from '../apicalls/user'
+import 'animate.css'
+import name from '../assets/bg-img/BookMyShow-Wiki-2048x1152.png'
+
+function Register() {
+    const onFinish = async (values) => {
+        console.log(values)
+        try {
+            const response = await RegisterUser(values)
+            if (response.success) {
+                message.success(response.message)
+            } else {
+                message.error(response.message)
+            }
+        } catch (error) {
+            message.error(error.message)
+
+        }
+    }
+    return (
+        <div className=' flex w-full gap-10'>
+            <img src={name} alt="" className='hidden sm:block' />
+            <div className=' min-h-screen flex flex-col items-center justify-center text-xl  text-center'>
+                <header>
+                    <main>
+                        <section className='left-section py-3'>
+                            <h1>Register to BookMyShow</h1>
+                        </section>
+                        <section className='right-section block'>
+                            <Form layout='vertical' onFinish={onFinish}>
+                                <Form.Item
+                                    label='Name:'
+                                    htmlFor='name'
+                                    name='name'
+                                    rules={[{ required: true, message: 'Name is required' }]}>
+                                    <Input id='name'
+                                        type='text'
+                                        placeholder='Enter your name'></Input>
+                                </Form.Item>
+                                <Form.Item
+                                    label='Email:'
+                                    htmlFor='email'
+                                    name='email'
+                                    rules={[{ required: true, message: 'Email is required' }]}>
+                                    <Input id='email'
+                                        type='text'
+                                        placeholder='Enter your email'></Input>
+
+                                </Form.Item>
+                                <Form.Item label='Password:'
+
+                                    htmlFor='password'
+                                    name='password'
+                                    rules={[{ required: true, message: 'password is required' }]}>
+                                    <Input id='password'
+                                        type='password'
+                                        placeholder='Enter your password'></Input>
+                                </Form.Item>
+                                <Form.Item>
+                                    <Button type='primary'
+                                        htmlType='submit'
+                                        style={{
+                                            fontSize: '1rem', fontWeight: '600', width: '10rem'
+                                        }}
+                                    >Sign Up</Button>
+                                </Form.Item>
+                            </Form>
+                            <div>
+                                <p className=' text-sm '>
+                                    Already a user? <Link to='/login' className=' bg-sky-500'>Login Now</Link>
+                                </p>
+                            </div>
+
+
+
+                        </section>
+                    </main>
+                </header>
+            </div>
+        </div>
+    )
+}
+
+export default Register
