@@ -1,15 +1,16 @@
 import React from 'react'
-import { Button, Form, Input, message } from 'antd'
+import { Button, Form, Input, message,Radio} from 'antd'
 import { Link } from 'react-router-dom'
 import { RegisterUser } from '../apicalls/user'
 import 'animate.css'
+
 import name from '../assets/bg-img/BookMyShow-Wiki-2048x1152.png'
 
 function Register() {
-    const onFinish = async (values) => {
-        console.log(values)
+    const onFinish = async (value) => {
+        console.log(value)
         try {
-            const response = await RegisterUser(values)
+            const response = await RegisterUser(value)
             if (response.success) {
                 message.success(response.message)
             } else {
@@ -38,7 +39,8 @@ function Register() {
                                     rules={[{ required: true, message: 'Name is required' }]}>
                                     <Input id='name'
                                         type='text'
-                                        placeholder='Enter your name'></Input>
+                                        placeholder='Enter your name'
+                                        rules={[{ required: true, message: "Email is required!" }]}></Input>
                                 </Form.Item>
                                 <Form.Item
                                     label='Email:'

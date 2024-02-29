@@ -1,8 +1,28 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
+import { message } from 'antd'
+import { LoginUser } from '../apicalls/user'
+
 import 'animate.css'
 function Login() {
+    const navigate = useNavigate()
+    const onFinish = async(values)=>{
+    
+        try {
+            const response = await LoginUser(values)
+            if (response.success) {
+                message.success(response.message)
+                localStorage.setItem('token',response.token)
+                navigate('/')
+            } else {
+                message.error(response.message)
+            }
+        } catch (error) {
+            message.error(error.message)
+
+        }
+    }
     return (
         <div className=' grid grid-cols-3'>
             <div className=" h-[95vh] bg-cover col-span-2" style={{ backgroundImage: 'url(https://blogest.org/wp-content/uploads/2023/02/BookMyShow-Wiki-2048x1152.jpg)' }}></div>
@@ -13,7 +33,7 @@ function Login() {
                         <h1>Login to BookMyShow</h1>
                     </section>
                     <section className='right-section block'>
-                        <Form layout='vertical'>
+                        <Form layout='vertical' onFinish={onFinish}>
                             
                             <Form.Item 
                             label='Email:'
