@@ -1,6 +1,12 @@
 /* body{
     background-color: aquamarine;
 }*/
+.bg-img{
+    display: flex;
+    width: fit-content;
+    gap: 30px;
+}
+
 .App-header {
    display: flex;
    flex-direction: column;

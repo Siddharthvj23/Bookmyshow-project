@@ -1,9 +1,10 @@
 import React, { useEffect,useState } from 'react'
 import { GetCurrentUser } from '../apicalls/user'
 import { useNavigate } from 'react-router-dom'
-import { message } from 'antd'
+import { message , Layout } from 'antd'
 import { hideloading, showloading } from '../redux/loaderSlice'
 import {useDispatch} from 'react-redux'
+import { Header } from 'antd/es/layout/layout'
 
 function ProtectedRoute({children}) {
 const [user,setUser] = useState(null)
@@ -31,7 +32,13 @@ const dispatch = useDispatch()
         }
     },[])
   return (
-    <div>{user && user.name}</div>
+    <div>
+        <Layout>
+            <Header>
+                
+            </Header>
+        </Layout>
+    </div>
   )
 }
 

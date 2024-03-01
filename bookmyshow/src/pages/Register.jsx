@@ -22,7 +22,7 @@ function Register() {
         }
     }
     return (
-        <div className=' flex w-full gap-10'>
+        <div className='bg-img'>
             <img src={name} alt="" className='hidden sm:block' />
             <div className='App-header'>
                 <header>

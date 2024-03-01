@@ -1,10 +1,12 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
 import { Link, useNavigate} from 'react-router-dom'
+import name from '../assets/bg-img/Book-my-show-filmy-Pass-2-696x392.jpg'
 import { message } from 'antd'
 import { LoginUser } from '../apicalls/user'
-
 import 'animate.css'
+
+
 function Login() {
     const navigate = useNavigate()
     const onFinish = async(values)=>{
@@ -24,8 +26,8 @@ function Login() {
         }
     }
     return (
-        <div className=' grid grid-cols-3'>
-            <div className=" h-[95vh] bg-cover col-span-2" style={{ backgroundImage: 'url(https://blogest.org/wp-content/uploads/2023/02/BookMyShow-Wiki-2048x1152.jpg)' }}></div>
+        <div className='bg-img'>
+            <img src={name} alt="" />
             <div className='App-header'>
                 <header>
                 <main>
