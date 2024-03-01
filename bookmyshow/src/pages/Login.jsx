@@ -26,13 +26,13 @@ function Login() {
     return (
         <div className=' grid grid-cols-3'>
             <div className=" h-[95vh] bg-cover col-span-2" style={{ backgroundImage: 'url(https://blogest.org/wp-content/uploads/2023/02/BookMyShow-Wiki-2048x1152.jpg)' }}></div>
-            <div className=' min-h-screen flex flex-col items-center justify-center text-xl  text-center'>
+            <div className='App-header'>
                 <header>
                 <main>
-                    <section className='left-section py-3'>
+                    <section className='left-section'>
                         <h1>Login to BookMyShow</h1>
                     </section>
-                    <section className='right-section block'>
+                    <section className='right-section'>
                         <Form layout='vertical' onFinish={onFinish}>
                             
                             <Form.Item 
@@ -62,8 +62,8 @@ function Login() {
                             </Form.Item>
                         </Form>
                         <div>
-                            <p className=' text-sm '>
-                              New User? <Link to='/Register' className=' bg-sky-500'>Register Here</Link>
+                            <p className=' text-link'>
+                              New User? <Link to='/Register'>Register Here</Link>
                             </p>
                         </div>
 

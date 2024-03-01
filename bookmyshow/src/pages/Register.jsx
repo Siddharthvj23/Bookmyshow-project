@@ -24,13 +24,13 @@ function Register() {
     return (
         <div className=' flex w-full gap-10'>
             <img src={name} alt="" className='hidden sm:block' />
-            <div className=' min-h-screen flex flex-col items-center justify-center text-xl  text-center'>
+            <div className='App-header'>
                 <header>
                     <main>
-                        <section className='left-section py-3'>
+                        <section className='left-section'>
                             <h1>Register to BookMyShow</h1>
                         </section>
-                        <section className='right-section block'>
+                        <section className='right-section '>
                             <Form layout='vertical' onFinish={onFinish}>
                                 <Form.Item
                                     label='Name:'
@@ -71,8 +71,8 @@ function Register() {
                                 </Form.Item>
                             </Form>
                             <div>
-                                <p className=' text-sm '>
-                                    Already a user? <Link to='/login' className=' bg-sky-500'>Login Now</Link>
+                                <p className='text-link'>
+                                    Already a user? <Link to='/login' >Login Now</Link>
                                 </p>
                             </div>
 
