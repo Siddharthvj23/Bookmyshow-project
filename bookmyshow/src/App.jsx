@@ -13,7 +13,13 @@ function App() {
   return (
     <>
       <div className='App'>
-        {loading && <div> Loading...</div>}
+        {/* {loading && (<div className='loader-container'>
+        
+          <div className='loader'></div>
+      
+        </div>
+        )} */}
+
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute>} />

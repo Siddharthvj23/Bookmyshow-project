@@ -1,45 +1,50 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GetCurrentUser } from '../apicalls/user'
 import { useNavigate } from 'react-router-dom'
-import { message , Layout } from 'antd'
+import { message, Layout } from 'antd'
 import { hideloading, showloading } from '../redux/loaderSlice'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Header } from 'antd/es/layout/layout'
 
-function ProtectedRoute({children}) {
-const [user,setUser] = useState(null)
-const dispatch = useDispatch()
-    const getValiduser = async()=>{
+function ProtectedRoute({ children }) {
+    
+    const [user, setUser] = useState(null)
+    const dispatch = useDispatch()
+    const getValiduser = async () => {
         try {
             dispatch(showloading())
             const response = await GetCurrentUser()
-            console.log(response)
+            // console.log(response)
             dispatch(setUser(response.data))
             dispatch(hideloading())
         } catch (error) {
             dispatch(setUser(null))
-            message.error(error.message)            
+            message.error(error.message)
         }
     }
 
     const navigate = useNavigate()
 
-    useEffect(()=>{
-        if(localStorage.getItem('token')){
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
             getValiduser()
-        }else{
+        } else {
             navigate("/login")
         }
-    },[])
-  return (
-    <div>
-        <Layout>
-            <Header>
-                
-            </Header>
-        </Layout>
-    </div>
-  )
+    }, [])
+    return (
+        <div>
+            <Layout>
+                <Header>
+
+                    <h3 className=' text-white'>
+                        Book my show
+                    </h3>
+
+                </Header>
+            </Layout>
+        </div>
+    )
 }
 
 export default ProtectedRoute

@@ -123,30 +123,65 @@
 // promiseReadFile.catch(function(err) {
 //     console.log('This is Your Error -> ' + err)
 // })
-function placeOrder(drink) {
-    return new Promise(function(resolve, reject) {
-        if(drink === 'coffee') {
-            resolve('Order for Coffee Placed.')
-        }
-        else {
-            reject('Order can not be Placed.')
-        }
-    })
+// function placeOrder(drink) {
+//     return new Promise(function(resolve, reject) {
+//         if(drink === 'coffee') {
+//             resolve('Order for Coffee Placed.')
+//         }
+//         else {
+//             reject('Order can not be Placed.')
+//         }
+//     })
+// }
+
+// function processOrder(orderPlaced) {
+//     return new Promise(function(resolve) {
+//         resolve(`${orderPlaced} and Served.`)
+//     })
+// }
+
+// placeOrder('coffee').then(function(orderStatus) {
+//     console.log(orderStatus)
+//     return orderStatus
+// }).then(function(orderStatus) {
+//     let orderIsProcessed = processOrder(orderStatus)
+//     console.log(orderIsProcessed)
+//     return orderIsProcessed
+// }).then(function(orderIsProcessed) {
+//     console.log(orderIsProcessed)
+// })
+// var a = 10;
+// console.log("line number 2", a); //10
+
+// function fn() {
+    
+//     console.log("line number 4", a); //ReferenceError 
+//     // var a = 20;
+//     a++;
+//     console.log("line number 7", a);
+//     if (a) {
+//         // let a = 30;
+//         a++;
+//         console.log("line number 11", a);
+//     }
+//     console.log("line number 13", a);
+// }
+
+// fn();
+// console.log("line number 16", a);
+
+
+let cap ={
+    name:'sid',
+    sayhi:function(){
+        console.log('ho from',this.name)
+    }
 }
 
-function processOrder(orderPlaced) {
-    return new Promise(function(resolve) {
-        resolve(`${orderPlaced} and Served.`)
-    })
-}
+cap.sayhi() //hi from sid
+let sayhiadd = cap.sayhi
+sayhiadd();//hi from undifened
 
-placeOrder('coffee').then(function(orderStatus) {
-    console.log(orderStatus)
-    return orderStatus
-}).then(function(orderStatus) {
-    let orderIsProcessed = processOrder(orderStatus)
-    console.log(orderIsProcessed)
-    return orderIsProcessed
-}).then(function(orderIsProcessed) {
-    console.log(orderIsProcessed)
-})
+let ans = sayhiadd.bind(cap)
+ans()
+console.log(ans)

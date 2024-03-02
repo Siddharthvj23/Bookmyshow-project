@@ -27,7 +27,7 @@ function Login() {
     }
     return (
         <div className='bg-img'>
-            <img src={name} alt="" />
+            <img src={name} alt="" className='formImg' />
             <div className='App-header'>
                 <header>
                 <main>

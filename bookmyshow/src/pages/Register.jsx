@@ -23,7 +23,7 @@ function Register() {
     }
     return (
         <div className='bg-img'>
-            <img src={name} alt="" className='hidden sm:block' />
+            <img src={name} alt="" className='formImg'/>
             <div className='App-header'>
                 <header>
                     <main>

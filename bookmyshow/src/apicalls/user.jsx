@@ -4,7 +4,7 @@ import { axiosInstance } from "./index"
 //register  a user
 export const RegisterUser = async(value)=>{
     try {
-        const response = await axiosInstance.post('api/users/register',value)
+        const response = await axiosInstance.post('/api/users/register',value)
         return response.data
     } catch (error) {
         console.log(error)
@@ -15,7 +15,7 @@ export const RegisterUser = async(value)=>{
 
 export const LoginUser = async (value) =>{
     try {
-        const response = await axiosInstance.post("api/users/login" ,value)
+        const response = await axiosInstance.post("/api/users/login" ,value)
         return response.data
     } catch (error) {
         console.log(err);
@@ -25,7 +25,7 @@ export const LoginUser = async (value) =>{
 //get current user from frontend
 export const GetCurrentUser = async () =>{
     try {
-        const response = await axiosInstance.get("api/user/get-current-user")
+        const response = await axiosInstance.get("/api/user/get-current-user")
         return response.data
     } catch (error) {
         console.log(error)
