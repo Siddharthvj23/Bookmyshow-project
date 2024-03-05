@@ -25,7 +25,7 @@ export const LoginUser = async (value) =>{
 //get current user from frontend
 export const GetCurrentUser = async () =>{
     try {
-        const response = await axiosInstance.get("/api/user/get-current-user")
+        const response = await axiosInstance.get("/api/users/get-current-user")
         return response.data
     } catch (error) {
         console.log(error)

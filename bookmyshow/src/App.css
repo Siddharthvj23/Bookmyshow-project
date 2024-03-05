@@ -1,6 +1,7 @@
-/* body{
-    background-color: aquamarine;
-}*/
+.home-body{
+    height: 100vh;
+    background-color: red;
+} 
 .bg-img {
     display: grid;
     grid-template-columns: 1fr 300px;
@@ -68,4 +69,20 @@
     -webkit-animation: spin 2s linear infinite;
     /* Safari */
     animation: spin 2s linear infinite;
+}
+
+.nav-container{
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1 ;
+    width: 100%;
+
+}
+
+.child-container{
+    padding: 20px;
+    
+    max-height: 100%;
 }
