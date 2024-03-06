@@ -4,19 +4,38 @@ import { Table } from 'antd'
 function MoviesList() {
     const tableHeadings = [
         {
-            tittle : 'poster'
+            title : 'Poster'
         },
         {
-            tittle : 'Release Date'
+          title : 'Movie name'
+        },
+        {
+          title : 'Description'
+        },
+        {
+          title : 'Duration'
+        },
+        {
+          title : 'Genre'
+        },
+        {
+          title : 'Language'
+        },
+        {
+            title : 'Release Date'
+        },
+        {
+          title : 'Action'
         }
     ]
 
   return (
-    <div>
-        <h1>Movie table</h1>
-       <Table columns={}/>
+    <>
+    
+        
+       <Table columns={tableHeadings}/>
 
-    </div>
+    </>
   )
 }
 
