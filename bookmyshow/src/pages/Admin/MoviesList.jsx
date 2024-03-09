@@ -5,11 +5,15 @@ import { hideloading, showloading } from '../../redux/loaderSlice'
 import { useDispatch } from 'react-redux'
 import { getAllMovies } from '../../apicalls/movies'
 import moment from 'moment'
+import {EditOutlined,DeleteOutlined} from '@ant-design/icons'
 
 function MoviesList() {
   const [isModalOpen, setisModalOpen] = useState(false)
+  const [selectedMovie,setSelectedMovie] = useState(null)
   const [Movies,setMovies] = useState([])
+  const [formType,setFormType] = useState('add')
   const dispatch = useDispatch()
+
   const getData = async () => {
     dispatch(showloading())
     const response = await getAllMovies()
@@ -65,7 +69,19 @@ function MoviesList() {
       }
     },
     {
-      title: 'Action'
+      title: 'Action',
+      render :(text,data)=>{
+        return (
+          <div>
+            <Button onClick={()=>{
+              setisModalOpen(true)
+              setSelectedMovie(data)
+              setFormType('edit')
+            }}><EditOutlined/></Button>
+            <Button><DeleteOutlined/></Button>
+          </div>
+        )
+      }
     }
   ]
   useEffect(() => {
@@ -74,7 +90,7 @@ function MoviesList() {
   return (
     <>
       <div className='form-btn'>
-        <Button onClick={() => { setisModalOpen(true) }}>Add Movie</Button>
+        <Button onClick={() => { setisModalOpen(true); setFormType('add') }}>Add Movie</Button>
       </div>
 
       <Table dataSource={Movies} columns={tableHeadings} />
@@ -82,6 +98,7 @@ function MoviesList() {
         <MovieForm
           isModalOpen={isModalOpen}
           setisModalOpen={setisModalOpen}
+          selectedMovie={selectedMovie}
         />)}
 
 

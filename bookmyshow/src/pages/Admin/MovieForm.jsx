@@ -8,7 +8,7 @@ import { addMovie } from '../../apicalls/movies'
 // const movieForm = ({isModalOpen})=>{
 //    
 // }
-function MovieForm({ isModalOpen ,setisModalOpen}) { 
+function MovieForm({ isModalOpen ,setisModalOpen,selectedMovie,setSelectedMovie,formType}) { 
     
     const handleCancel = ()=>{
         setisModalOpen(false)
@@ -33,13 +33,14 @@ function MovieForm({ isModalOpen ,setisModalOpen}) {
         <div>
             <Modal
                 centered
+                title={formType === "add" ? "Add Movie" : "Edit Movie"}
                 open={isModalOpen}
                 onCancel={handleCancel}
                 
                 width={700}
             >
                 <Form layout="vertical"
-                    style={{ width: "100%" }} onFinish={onFinish}>
+                    style={{ width: "100%" }} onFinish={onFinish} initialValues={selectedMovie} >
                     <Row
                         gutter={{
                             xs: 6,
