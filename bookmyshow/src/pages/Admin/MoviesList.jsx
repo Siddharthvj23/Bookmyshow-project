@@ -1,39 +1,89 @@
-import React from 'react'
-import { Table } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Button, Table } from 'antd'
+import MovieForm from './MovieForm'
+import { hideloading, showloading } from '../../redux/loaderSlice'
+import { useDispatch } from 'react-redux'
+import { getAllMovies } from '../../apicalls/movies'
+import moment from 'moment'
 
 function MoviesList() {
-    const tableHeadings = [
-        {
-            title : 'Poster'
-        },
-        {
-          title : 'Movie name'
-        },
-        {
-          title : 'Description'
-        },
-        {
-          title : 'Duration'
-        },
-        {
-          title : 'Genre'
-        },
-        {
-          title : 'Language'
-        },
-        {
-            title : 'Release Date'
-        },
-        {
-          title : 'Action'
-        }
-    ]
+  const [isModalOpen, setisModalOpen] = useState(false)
+  const [Movies,setMovies] = useState([])
+  const dispatch = useDispatch()
+  const getData = async () => {
+    dispatch(showloading())
+    const response = await getAllMovies()
 
+
+    const allMovies = response.data
+
+    setMovies(allMovies.map((item)=>{
+      return {...item,key:`movie${item._id}`}
+    }))
+  
+    dispatch(hideloading())
+  }
+  const tableHeadings = [
+    {
+      title: 'Poster',
+      dataIndex:'poster',
+      render:(text,data)=>{
+        return (<img width='75' height='115' style={{objectFit:'cover'}}src={data.poster}/>)
+
+      }
+
+    },
+    {
+      title: 'Movie name',
+      dataIndex: 'title'
+    },
+    {
+      title: 'Description',
+      dataIndex:'description'
+     
+      
+    },
+    {
+      title: 'Duration',
+      dataIndex:'duration' ,
+      render:(text)=>{
+        return `${text} min`}
+    },
+    {
+      title: 'Genre',
+      dataIndex:'genre'
+    },
+    {
+      title: 'Language',
+      dataIndex:'language'
+    },
+    {
+      title: 'Release Date',
+      dataIndex:'releasedate',
+      render :(text,data)=>{
+        return moment(data.releasedate).format("MM-DD-YYYY")
+      }
+    },
+    {
+      title: 'Action'
+    }
+  ]
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <>
-    
-        
-       <Table columns={tableHeadings}/>
+      <div className='form-btn'>
+        <Button onClick={() => { setisModalOpen(true) }}>Add Movie</Button>
+      </div>
+
+      <Table dataSource={Movies} columns={tableHeadings} />
+      {isModalOpen && (
+        <MovieForm
+          isModalOpen={isModalOpen}
+          setisModalOpen={setisModalOpen}
+        />)}
+
 
     </>
   )

@@ -23,7 +23,7 @@ function Admin() {
     <>
       <h1>Admin</h1>
       <Tabs items={tabitems} />
-      <MovieForm/>
+    
     </>
   )
 }
