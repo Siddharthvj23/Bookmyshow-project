@@ -6,12 +6,15 @@ import { useDispatch } from 'react-redux'
 import { getAllMovies } from '../../apicalls/movies'
 import moment from 'moment'
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons'
+import DeleteMovieModal from './DeleteMovie'
 
 function MoviesList() {
   const [isModalOpen, setisModalOpen] = useState(false)
   const [selectedMovie,setSelectedMovie] = useState(null)
   const [Movies,setMovies] = useState([])
   const [formType,setFormType] = useState('add')
+  const [isDeleteModalOpen,setIsDeleteModalOpen] = useState(false)
+
   const dispatch = useDispatch()
 
   const getData = async () => {
@@ -78,7 +81,14 @@ function MoviesList() {
               setSelectedMovie(data)
               setFormType('edit')
             }}><EditOutlined/></Button>
-            <Button><DeleteOutlined/></Button>
+            <Button
+              onClick={()=>{
+                setIsDeleteModalOpen(true)
+                setSelectedMovie(data)
+              }}
+              >
+                <DeleteOutlined/>
+            </Button>
           </div>
         )
       }
@@ -99,7 +109,20 @@ function MoviesList() {
           isModalOpen={isModalOpen}
           setisModalOpen={setisModalOpen}
           selectedMovie={selectedMovie}
-        />)}
+          formType={formType}
+          setSelectedMovie={setSelectedMovie}
+          getData={getData}
+        />
+        )}
+
+        {isDeleteModalOpen &&(
+          <DeleteMovieModal
+            isDeleteModalOpen={isDeleteModalOpen}
+            selectedMovie={selectedMovie}
+            setIsDeleteModalOpen={setIsDeleteModalOpen}
+            setSelectedMovie={setSelectedMovie}
+            getData={getData}/>
+        )}
 
 
     </>

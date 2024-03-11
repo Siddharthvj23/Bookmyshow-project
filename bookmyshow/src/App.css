@@ -92,3 +92,8 @@
     justify-content: flex-end;
     padding-bottom: 20px;
 }
+
+.DeleteBtn-modal{
+    padding-top: 1rem;
+    font-size: 18px;
+}

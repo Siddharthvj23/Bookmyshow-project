@@ -1,33 +1,46 @@
 import { Form, Row, Col, Input, Select, Button, Modal, message } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
-import {showloading,hideloading} from '../../redux/loaderSlice'
+import { showloading, hideloading } from '../../redux/loaderSlice'
 import { useDispatch } from 'react-redux'
+import moment from 'moment'
 import React from 'react'
-import { addMovie } from '../../apicalls/movies'
-// import { useDispatch } from 'react-redux'
-// const movieForm = ({isModalOpen})=>{
-//    
-// }
-function MovieForm({ isModalOpen ,setisModalOpen,selectedMovie,setSelectedMovie,formType}) { 
-    
-    const handleCancel = ()=>{
-        setisModalOpen(false)
-    }
+import { addMovie, updateMovie } from '../../apicalls/movies'
+
+function MovieForm({ isModalOpen, setisModalOpen, selectedMovie, setSelectedMovie, formType ,getData}) {
+
     const dispatch = useDispatch()
-    const onFinish = async(values)=>{
+
+    if (selectedMovie) {
+        selectedMovie.releasedate = moment(selectedMovie.releasedate).format('YYYY-MM-DD')
+    }
+    console.log(selectedMovie)
+    const onFinish = async (values) => {
         try {
             dispatch(showloading())
-            const response = await addMovie(values)
-            dispatch(hideloading())
+            let response = null;
+            if (formType === 'add') {
+                response = await addMovie(values)
+                setSelectedMovie(null)
+            } else {
+                response = await updateMovie({ ...values, movieId: selectedMovie._id })
+                // setSelectedMovie(null)
+            }
 
-            if(response.success){
+            if (response.success) {
+                getData()
                 message.success(response.message)
-            }else{
+                setisModalOpen(false)
+            } else {
                 message.error(response.message)
             }
+            dispatch(hideloading())
         } catch (error) {
             message.error(error.message)
         }
+    }
+    const handleCancel = () => {
+        setisModalOpen(false)
+        setSelectedMovie(null)
     }
     return (
         <div>
@@ -36,7 +49,7 @@ function MovieForm({ isModalOpen ,setisModalOpen,selectedMovie,setSelectedMovie,
                 title={formType === "add" ? "Add Movie" : "Edit Movie"}
                 open={isModalOpen}
                 onCancel={handleCancel}
-                
+
                 width={700}
             >
                 <Form layout="vertical"
