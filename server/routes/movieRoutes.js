@@ -20,6 +20,7 @@ router.post('/add-movie',async(req,res)=>{
 
 //get all movie
 router.get('/get-movie',async(req,res)=>{
+    console.log(req)
     try {
        const allmovies = await Movie.find() 
        res.send({
@@ -37,9 +38,9 @@ router.get('/get-movie',async(req,res)=>{
 
 })
 //update movie 
-router.put('/update-movie/:id',async(req,res)=>{
+router.put('/update-movie',async(req,res)=>{
     try {
-        const movie = await Movie.findByIdAndUpdate(req.params.id)
+        const movie = await Movie.findByIdAndUpdate(req.body.movieId,req.body)
         res.send({
             success: true,
             message: 'The Movie has been updated',
@@ -52,6 +53,22 @@ router.put('/update-movie/:id',async(req,res)=>{
             message: error.message
         })
         
+    }
+})
+
+//Delete movie
+router.delete('/delete-movie',async(req,res)=>{
+    try {
+        const movie = await Movie.findByIdAndDelete(req.body.movieId)
+        res.send({
+            success:true,
+            message:'The Movie has been Deleted'
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message: error.message
+        })
     }
 })
 module.exports = router 
