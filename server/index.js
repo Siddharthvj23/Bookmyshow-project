@@ -9,9 +9,11 @@ const app = express()
 
 const userRoutes = require('./routes/userRoutes')
 const movieRoutes = require('./routes/movieRoutes')
+const theatreRoutes = require('./routes/theatreRoutes')
 app.use(express.json())
 app.use('/api/users',userRoutes)
 app.use('/api/movies',movieRoutes)
+app.use('/api/theatres',theatreRoutes)
 
 
 app.listen(PORT,()=>{

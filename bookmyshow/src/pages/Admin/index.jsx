@@ -2,8 +2,7 @@ import React from 'react'
 import { Tabs } from 'antd'
 import MoviesList from './MoviesList'
 import Theatres from './Theatres'
-import MovieForm from './MovieForm'
-import { Children } from 'react'
+
 function Admin() {
   const tabitems = [
     {

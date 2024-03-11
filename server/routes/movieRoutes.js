@@ -20,7 +20,7 @@ router.post('/add-movie',async(req,res)=>{
 
 //get all movie
 router.get('/get-movie',async(req,res)=>{
-    console.log(req)
+    
     try {
        const allmovies = await Movie.find() 
        res.send({
