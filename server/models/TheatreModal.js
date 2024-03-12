@@ -9,9 +9,9 @@ const TheatreSchme =  new mongoose.Schema({
         type: String,
         required:true
     },
-    ownername:{
-        type: String,
-        required:true
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
     },
     email:{
         type:String,
