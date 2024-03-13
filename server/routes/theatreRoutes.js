@@ -48,4 +48,20 @@ router.put('/update-theatre', async(req,res)=>{
     }
 })
 
+router.delete('/deleteTheatre',async(req,res)=>{
+    try {
+        const theatre = await Theatre.findByIdAndDelete(req.body.theatreId)
+        res.send({
+            success: true,
+            message: 'The theatre has been Deleted'
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message:error.message
+        })
+        
+    }
+})
+
 module.exports = router

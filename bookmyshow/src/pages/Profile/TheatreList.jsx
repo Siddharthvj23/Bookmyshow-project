@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import TheatreForm from './TheatreForm'
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons'
 import { getAllTheatres } from '../../apicalls/theatres'
-
+import DeleteTheatreModal from './DeleteTheatre'
 
 function TheatreList() {
     const {user} = useSelector((state) => state.user)
@@ -14,6 +14,7 @@ function TheatreList() {
     const [selectedTheatre,setSelectedTheatre] = useState(null)
     const [formType,setFormType] = useState('add')
     const [Theatres,setTheatres] = useState([])
+    const [isDeleteModalOpen,setisDeleteModalOpen] = useState(false)
     const dispatch = useDispatch()
 
     const getData = async()=>{
@@ -89,6 +90,7 @@ function TheatreList() {
                         }}><EditOutlined/></Button>
                         <Button 
                             onClick={()=>{
+                                setisDeleteModalOpen(true)
                                 setSelectedTheatre(data)
                             }}><DeleteOutlined/></Button>
                     </div>
@@ -116,6 +118,15 @@ function TheatreList() {
                 setisModalOpen={setisModalOpen}
                 getData={getData}
                 />
+        )}
+
+        {isDeleteModalOpen &&(
+            <DeleteTheatreModal
+                isDeleteModalOpen={isDeleteModalOpen}
+                selectedTheatre={selectedTheatre}
+                setisDeleteModalOpen={setisDeleteModalOpen}
+                setSelectedTheatre={setSelectedTheatre}
+                getData={getData}/>
         )}
     </div>
   )

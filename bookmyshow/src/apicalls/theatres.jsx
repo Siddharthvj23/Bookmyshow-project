@@ -33,3 +33,15 @@ export const updateTheatre = async(payload)=>{
         
     }
 }
+
+//Delete theatre
+
+export const deleteTheatre = async(payload)=>{
+    try {
+        const response = await axiosInstance.delete('/api/theatres/deleteTheatre',{data:payload})
+        return response.data
+    } catch (error) {
+        console.log(error)
+        
+    }
+}
