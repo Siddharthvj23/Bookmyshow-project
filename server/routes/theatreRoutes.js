@@ -1,10 +1,13 @@
 const router = require('express').Router()
+const authmiddleware = require('../middleware/authMiddleware')
 const Theatre = require('../models/TheatreModal')
+const User = require('../models/userModel')
 
 router.post('/add-theatre', async(req,res)=>{
     try {
         const newTheatre = new Theatre(req.body)
         await newTheatre.save()
+    
         res.send({
             success: true,
             message: 'New theatre has been added'
@@ -33,13 +36,47 @@ router.get('/get-all-theatres',async(req,res)=>{
     }
 })
 
-router.put('/update-theatre', async(req,res)=>{
+//theatres of specific owner
+router.post('/get-all-theatres-by-owner',async(req,res)=>{
     try {
-        await Theatre.findByIdAndUpdate(req.body.theatreId,req.body)
+        const allTheatres = await Theatre.find({owner: req.body.owner})
+        res.send({
+            success: true,
+            message: "All theatres fetched successfully",
+            data: allTheatres
+        })
+    } catch (error) {
+        res.send({
+            success: true,
+            message: error.message
+        })
+    }
+})
+
+router.put('/update-theatre',authmiddleware,async(req,res)=>{
+    try {
+       
+        const ans =  await Theatre.findById(req.body.theatreId)
+        const ans2 = await User.findById(req.body.userId)
+        
+        const theatreOwner = ans.owner.toString()
+        const admin = ans2._id.toString()
+    
+
+        if(theatreOwner===req.body.userId || admin === req.body.userId){
+           await Theatre.findByIdAndUpdate(req.body.theatreId,req.body)
+           
         res.send({
             success: true,
             message: 'Theatre has been Updated'
-        })
+        }) 
+        }else{
+            res.send({
+                success: false,
+                message: "you cannot update this theatre as you're not the owner"
+            })
+        }
+        
     } catch (error) {
         res.send({
             success:false,

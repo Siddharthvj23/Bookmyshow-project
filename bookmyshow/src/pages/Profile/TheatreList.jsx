@@ -21,12 +21,14 @@ function TheatreList() {
         try {
             dispatch(showloading())
         const response = await getAllTheatres({owner: user._id})
+
+        console.log(response)
         if (response.success){
             const allTheatres = response.data
 
             setTheatres(
                 allTheatres.map((item)=>{
-                    return {...item,key:`theatre ${item._id}`}
+                    return { ...item, key:`theatre${item._id}`}
 
                 })
             )
@@ -93,6 +95,7 @@ function TheatreList() {
                                 setisDeleteModalOpen(true)
                                 setSelectedTheatre(data)
                             }}><DeleteOutlined/></Button>
+                        {data.isActive && <Button>+Show</Button>}
                     </div>
                 )
             }
@@ -106,6 +109,7 @@ function TheatreList() {
     <div>
         <div className='form-btn'> 
             <Button  onClick={()=>{setisModalOpen(true); setFormType('add')}}>Add Theatres</Button>
+          
         </div>
        
         <Table dataSource={Theatres} columns={tableheadings}/>

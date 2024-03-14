@@ -9,10 +9,7 @@ const TheatreSchme =  new mongoose.Schema({
         type: String,
         required:true
     },
-    owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
-    },
+    
     email:{
         type:String,
         required:true
@@ -20,6 +17,10 @@ const TheatreSchme =  new mongoose.Schema({
     phone:{
         type: Number,
         required:true
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
     },
     isActive:{
         type: Boolean,

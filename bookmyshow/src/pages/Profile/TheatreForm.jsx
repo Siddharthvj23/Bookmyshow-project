@@ -13,13 +13,14 @@ function TheatreForm({isModalOpen,setisModalOpen,selectedTheatre,setSelectedThea
             dispatch(showloading())
             let response = null
             if(formType === 'add'){
-                response = await addTheatre(values)
+                response = await addTheatre({...values , owner: user._id})
 
             }else{
                 values.theatreId = selectedTheatre._id
-                response = await updateTheatre({...values , owner: user._id})
+                response = await updateTheatre(values)
+            
             }
-
+console.log(response)
             if (response.success){
                 getData()
                 message.success(response.message)

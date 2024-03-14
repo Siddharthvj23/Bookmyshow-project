@@ -1,9 +1,20 @@
 import { axiosInstance } from "./index";
 
-//get all theatres
-export  const getAllTheatres = async(value) =>{
+
+//get all theatres to admin
+export const getAllTheatresToAdmin = async(payload)=>{
     try {
-        const response = await axiosInstance.get('/api/theatres/get-all-theatres',value)
+        const response =  await axiosInstance.get('/api/theatres/get-all-theatres',payload)
+        return response.data
+    } catch (error) {
+        return error.response
+    }
+}
+
+//get all theatres of a specific owner
+export  const getAllTheatres = async(payload) =>{
+    try {
+        const response = await axiosInstance.post('/api/theatres/get-all-theatres-by-owner',payload)
         return response.data
     } catch (error) {
         return error.response
@@ -28,6 +39,8 @@ export const addTheatre = async(payload) =>{
 export const updateTheatre = async(payload)=>{
     try {
         const response = await axiosInstance.put('/api/theatres/update-theatre',payload)
+        return response.data
+
     } catch (error) {
         console.log(error)
         
