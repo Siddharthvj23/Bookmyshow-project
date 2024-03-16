@@ -1,14 +1,14 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Table, Modal, Row, Form, Button, Input, Select, message } from 'antd';
 import { showloading, hideloading } from '../../redux/loaderSlice';
 import { useDispatch } from 'react-redux';
-import { ArrowLeftOutlined,EditOutlined,DeleteOutlined} from "@ant-design/icons";
+import { ArrowLeftOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { getAllMovies } from '../../apicalls/movies';
-import { addShow,deleteShow,updateShow,getShowsByTheatre } from '../../apicalls/show';
+import { addShow, deleteShow, updateShow, getShowsByTheatre } from '../../apicalls/show';
 import moment from 'moment'
 
 
-const ShowModal = ({isShowModalOpen,setisShowModalOpen,selectedTheatre}) => {
+const ShowModal = ({ isShowModalOpen, setisShowModalOpen, selectedTheatre }) => {
     const [view, setView] = useState("table");
     const [movies, setMovies] = useState(null);
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -17,22 +17,22 @@ const ShowModal = ({isShowModalOpen,setisShowModalOpen,selectedTheatre}) => {
     const dispatch = useDispatch();
 
 
-    const getData = async() =>{
+    const getData = async () => {
         try {
             dispatch(showloading())
             const movieResponse = await getAllMovies()
-            if (movieResponse.success){
+            if (movieResponse.success) {
                 setMovies(movieResponse.data)
-            }else{
+            } else {
                 message.error(movieResponse.message)
             }
 
             const showResponse = await getShowsByTheatre({
-                theatreId : selectedTheatre._id,
+                theatreId: selectedTheatre._id,
             })
-            if(showResponse.success){
+            if (showResponse.success) {
                 setShows(showResponse.data)
-            }else{
+            } else {
                 message.error(showResponse.message)
             }
             dispatch(hideloading())
@@ -42,20 +42,20 @@ const ShowModal = ({isShowModalOpen,setisShowModalOpen,selectedTheatre}) => {
         }
     }
 
-    const onFinish = async(values)=>{
+    const onFinish = async (values) => {
         try {
             dispatch(showloading())
-            let response= null
+            let response = null
             if (view === "form") {
-                response = await addShow({...values,theatre: selectedTheatre._id})
-            }else{
-                response = await updateShow({...values,showId: selectedShow._id,theatre: selectedTheatre._id})
+                response = await addShow({ ...values, theatre: selectedTheatre._id })
+            } else {
+                response = await updateShow({ ...values, showId: selectedShow._id, theatre: selectedTheatre._id })
             }
-            if (response.success){
+            if (response.success) {
                 getData()
                 message.success(response.message)
                 setView('table')
-            }else{
+            } else {
                 message.error(response.message)
             }
             dispatch(hideloading())
@@ -64,18 +64,18 @@ const ShowModal = ({isShowModalOpen,setisShowModalOpen,selectedTheatre}) => {
             dispatch(hideloading())
         }
     }
-    const handleCancel = ()=>{
+    const handleCancel = () => {
         setisShowModalOpen(false)
     }
 
-    const handleDelete = async (showId) =>{
+    const handleDelete = async (showId) => {
         try {
             dispatch(showloading())
-            const response = await deleteShow({showId: showId})
-            if(response.success){
+            const response = await deleteShow({ showId: showId })
+            if (response.success) {
                 message.success(response.message)
                 getData()
-            }else{
+            } else {
                 message.error(response.message)
             }
             dispatch(hideloading())
@@ -107,15 +107,15 @@ const ShowModal = ({isShowModalOpen,setisShowModalOpen,selectedTheatre}) => {
         {
             title: "Movie",
             dataIndex: "movie",
-            render: (text,data)=>{
+            render: (text, data) => {
                 return data.movie.title;
             }
 
         },
         {
             title: "Ticket Price",
-            dataIndex: "ticketPrice",
-            key: "ticketPrice",
+            dataIndex: "ticketprice",
+            key: "ticketprice",
         },
         {
             title: "Total Seats",
@@ -125,19 +125,39 @@ const ShowModal = ({isShowModalOpen,setisShowModalOpen,selectedTheatre}) => {
         {
             title: "Available Seats",
             dataIndex: "seats",
-            render: (text,data)=>{
+            render: (text, data) => {
                 return data.totalSeats - data.bookedSeats.length
             }
         },
         {
             title: "Action",
             dataIndex: "action",
-
+            render: (text, data) => {
+                return (
+                    <div>
+                        <Button
+                            onClick={() => {
+                                setView('edit')
+                                setSelectedMovie(data.movie)
+                                setSelectedShow({
+                                    ...data, data: moment(data.date).format('YYYY-MM-DD'),
+                                })
+                            }}><EditOutlined /></Button>
+                        <Button
+                            onClick={() => handleDelete(data._id) }>
+                            <DeleteOutlined />
+                        </Button>
+                        {data.isActive && (
+                            <Button
+                                onClick={() => { setisShowModalOpen(true) }}> + Shows </Button>)}
+                    </div>
+                )
+            }
         }]
 
-        useEffect(()=>{
-            getData()
-        },[])
+    useEffect(() => {
+        getData()
+    }, [])
     return (
         <div>
             <Modal
@@ -157,7 +177,7 @@ const ShowModal = ({isShowModalOpen,setisShowModalOpen,selectedTheatre}) => {
                                 : "Edit Show"}
                     </h3>
                     {view === "table" && (
-                        <Button  onClick={() => setView("form")}>
+                        <Button onClick={() => setView("form")}>
                             Add Show
                         </Button>
                     )}
@@ -275,15 +295,15 @@ const ShowModal = ({isShowModalOpen,setisShowModalOpen,selectedTheatre}) => {
                                     <Col span={8}>
                                         <Form.Item
                                             label="Ticket Price"
-                                            htmlFor="ticketPrice"
-                                            name="ticketPrice"
+                                            htmlFor="ticketprice"
+                                            name="ticketprice"
                                             className="d-block"
                                             rules={[
                                                 { required: true, message: "Ticket price is required!" },
                                             ]}
                                         >
                                             <Input
-                                                id="ticketPrice"
+                                                id="ticketprice"
                                                 type="number"
                                                 placeholder="Enter the ticket price"
                                             ></Input>
