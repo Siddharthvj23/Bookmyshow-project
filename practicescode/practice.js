@@ -185,3 +185,31 @@ sayhiadd();//hi from undifened
 let ans = sayhiadd.bind(cap)
 ans()
 console.log(ans)
+
+router.put('/update-theatre',authmiddleware,async(req,res)=>{
+    try {
+       
+        const ans =  await Theatre.findById(req.body.theatreId)
+        const theatreOwner = ans.owner.toString()
+        console.log(theatreOwner,req.body.userId)
+        if(theatreOwner===req.body.userId){
+           await Theatre.findByIdAndUpdate(req.body.theatreId,req.body)
+           
+        res.send({
+            success: true,
+            message: 'Theatre has been Updated'
+        }) 
+        }else{
+            res.send({
+                success: false,
+                message: "you cannot update this theatre as you're not the owner"
+            })
+        }
+        
+    } catch (error) {
+        res.send({
+            success:false,
+            message:error.message
+        })        
+    }
+})
