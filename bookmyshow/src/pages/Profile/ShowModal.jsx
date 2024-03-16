@@ -1,18 +1,89 @@
-import React from 'react'
-import { Col, Table, Modal, Row, Form, Button, Input, Select } from 'antd'
-import { showloading, hideloading } from '../../redux/loaderSlice'
-import { useDispatch } from 'react-redux'
-import {
-    ArrowLeftOutlined,
-    EditOutlined,
-    DeleteOutlined,
-} from "@ant-design/icons";
-import { getAllMovies } from '../../apicalls/movies'
+import React, {useState, useEffect } from 'react';
+import { Col, Table, Modal, Row, Form, Button, Input, Select, message } from 'antd';
+import { showloading, hideloading } from '../../redux/loaderSlice';
+import { useDispatch } from 'react-redux';
+import { ArrowLeftOutlined,EditOutlined,DeleteOutlined} from "@ant-design/icons";
+import { getAllMovies } from '../../apicalls/movies';
+import { addShow,deleteShow,updateShow,getShowsByTheatre } from '../../apicalls/show';
+import moment from 'moment'
 
 
+const ShowModal = ({isShowModalOpen,setisShowModalOpen,selectedTheatre}) => {
+    const [view, setView] = useState("table");
+    const [movies, setMovies] = useState(null);
+    const [selectedMovie, setSelectedMovie] = useState(null);
+    const [shows, setShows] = useState(null);
+    const [selectedShow, setSelectedShow] = useState(null);
+    const dispatch = useDispatch();
 
-const ShowModal = ({ }) => {
 
+    const getData = async() =>{
+        try {
+            dispatch(showloading())
+            const movieResponse = await getAllMovies()
+            if (movieResponse.success){
+                setMovies(movieResponse.data)
+            }else{
+                message.error(movieResponse.message)
+            }
+
+            const showResponse = await getShowsByTheatre({
+                theatreId : selectedTheatre._id,
+            })
+            if(showResponse.success){
+                setShows(showResponse.data)
+            }else{
+                message.error(showResponse.message)
+            }
+            dispatch(hideloading())
+        } catch (error) {
+            message.error(error.message)
+            dispatch(hideloading())
+        }
+    }
+
+    const onFinish = async(values)=>{
+        try {
+            dispatch(showloading())
+            let response= null
+            if (view === "form") {
+                response = await addShow({...values,theatre: selectedTheatre._id})
+            }else{
+                response = await updateShow({...values,showId: selectedShow._id,theatre: selectedTheatre._id})
+            }
+            if (response.success){
+                getData()
+                message.success(response.message)
+                setView('table')
+            }else{
+                message.error(response.message)
+            }
+            dispatch(hideloading())
+        } catch (error) {
+            message.error(error.message)
+            dispatch(hideloading())
+        }
+    }
+    const handleCancel = ()=>{
+        setisShowModalOpen(false)
+    }
+
+    const handleDelete = async (showId) =>{
+        try {
+            dispatch(showloading())
+            const response = await deleteShow({showId: showId})
+            if(response.success){
+                message.success(response.message)
+                getData()
+            }else{
+                message.error(response.message)
+            }
+            dispatch(hideloading())
+        } catch (error) {
+            message.error(error.message)
+            dispatch(hideloading())
+        }
+    }
     const columns = [
         {
             title: "Show Name",
@@ -36,7 +107,9 @@ const ShowModal = ({ }) => {
         {
             title: "Movie",
             dataIndex: "movie",
-
+            render: (text,data)=>{
+                return data.movie.title;
+            }
 
         },
         {
@@ -52,19 +125,26 @@ const ShowModal = ({ }) => {
         {
             title: "Available Seats",
             dataIndex: "seats",
-
+            render: (text,data)=>{
+                return data.totalSeats - data.bookedSeats.length
+            }
         },
         {
             title: "Action",
             dataIndex: "action",
+
         }]
+
+        useEffect(()=>{
+            getData()
+        },[])
     return (
         <div>
             <Modal
                 centered
-                // title={selectedTheatre.name}
-                // open={isShowModalOpen}
-                // onCancel={handleCancel}
+                title={selectedTheatre.name}
+                open={isShowModalOpen}
+                onCancel={handleCancel}
                 width={1200}
                 footer={null}
             >
@@ -90,7 +170,7 @@ const ShowModal = ({ }) => {
                         layout="vertical"
                         style={{ width: "100%" }}
                         initialValues={view === "edit" ? selectedShow : null}
-                        // onFinish={onFinish}
+                        onFinish={onFinish}
                     >
                         <Row
                             gutter={{

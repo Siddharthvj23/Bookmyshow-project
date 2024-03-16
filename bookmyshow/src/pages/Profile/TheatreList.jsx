@@ -7,6 +7,7 @@ import TheatreForm from './TheatreForm'
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons'
 import { getAllTheatres } from '../../apicalls/theatres'
 import DeleteTheatreModal from './DeleteTheatre'
+import ShowModal from './ShowModal'
 
 function TheatreList() {
     const {user} = useSelector((state) => state.user)
@@ -15,6 +16,8 @@ function TheatreList() {
     const [formType,setFormType] = useState('add')
     const [Theatres,setTheatres] = useState([])
     const [isDeleteModalOpen,setisDeleteModalOpen] = useState(false)
+    const [isShowModalOpen,setisShowModalOpen] = useState(false)
+
     const dispatch = useDispatch()
 
     const getData = async()=>{
@@ -95,7 +98,7 @@ function TheatreList() {
                                 setisDeleteModalOpen(true)
                                 setSelectedTheatre(data)
                             }}><DeleteOutlined/></Button>
-                        {data.isActive && <Button>+Show</Button>}
+                        {data.isActive && <Button onClick={()=>{setisShowModalOpen(true); setSelectedTheatre(data)}}>+Show</Button>}
                     </div>
                 )
             }
@@ -131,6 +134,13 @@ function TheatreList() {
                 setisDeleteModalOpen={setisDeleteModalOpen}
                 setSelectedTheatre={setSelectedTheatre}
                 getData={getData}/>
+        )}
+
+        {isShowModalOpen &&(
+            <ShowModal
+                isShowModalOpen={isShowModalOpen}
+                setisShowModalOpen={setisShowModalOpen}
+                selectedTheatre={selectedTheatre}/>
         )}
     </div>
   )
