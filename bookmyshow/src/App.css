@@ -1,7 +1,26 @@
 .home-body{
-    height: 100vh;
     background-color: red;
 } 
+.Search-container{
+    
+    justify-content: flex-end;
+    position: sticky;
+}
+.Movie-container{
+    display: flex;
+    padding: 20px;  
+}
+.Movie-container:hover{
+    
+    cursor: pointer;
+
+}
+.Movie-title-container{
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    padding: 5px;
+}
 .bg-img {
     display: grid;
     grid-template-columns: 1fr 300px;
