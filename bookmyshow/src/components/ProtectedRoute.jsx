@@ -79,7 +79,7 @@ return (
                 <Menu theme='dark' mode='horizontal' items={navitems} />
 
             </Header>
-           <div className='child-container'>{children}</div> 
+         {children}
         </Layout>
     </>
 )

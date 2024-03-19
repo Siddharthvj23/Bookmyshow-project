@@ -1,10 +1,12 @@
 .home-body{
     background-color: red;
+    
 } 
 .Search-container{
     
     justify-content: flex-end;
     position: sticky;
+    padding: 10px;
 }
 .Movie-container{
     display: flex;
@@ -21,6 +23,41 @@
     justify-content: center;
     padding: 5px;
 }
+.Movie-inner-container{
+    
+    padding: 15px;
+}
+.Movie-inner-container-poster{
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 100vw;
+}
+.Movie-inner-container-data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    
+}
+.theatre-wrapper{
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+.show-ul li{
+    padding: 0.75rem 1rem;
+    border: 2px solid #bbb;
+    border-radius: 5px;
+    cursor: pointer;
+    color: orange;
+    transition: all 0.1s ease-in;
+    width: 100px;
+}
+.show-ul li:hover{
+    color: #fff;
+    background-color: orange;
+    border-color: transparent;
+}
 .bg-img {
     display: grid;
     grid-template-columns: 1fr 300px;
@@ -29,7 +66,12 @@
     /* gap: 25px; */
 
 }
-
+.pt-3{
+    padding-top: 0.75rem;
+}
+.blue-color{
+    color: #1890ff;
+}
 .formImg {
     height: 100%;
     width: 100%;
@@ -115,4 +157,63 @@
 .DeleteBtn-modal{
     padding-top: 1rem;
     font-size: 18px;
+}
+.seats-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.seats-container div{
+    width: 100%;
+    max-width: 600px;
+    margin-inline: auto;
+    margin-bottom: 25px;
+}
+.screen-p{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+.screen{
+    max-width: 75%;
+    margin-inline: auto;
+    height: 20px;
+    background-color: #eee;
+}
+.seat-ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    max-width: 600px;
+    justify-content: center;
+}
+.seat-ul .seat-btn{
+    background-color: #f6f6f6;
+    border: 1px solid #a0a0a0;
+    width: 40px;
+    height: 35px;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    font-size: 13px;
+    min-height: unset;
+
+}
+.d-block{
+    display: block;
+}
+.movie-title-details{
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+.show-name{
+    margin-bottom: 4px;
+    margin-top: 0;
+}
+.show-name span{
+    font-weight: 500;
+    color: #555;
 }

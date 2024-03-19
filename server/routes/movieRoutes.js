@@ -72,4 +72,25 @@ router.delete('/delete-movie',async(req,res)=>{
         })
     }
 })
+
+
+//get movie by id
+router.get('/movie/:id',async(req,res)=>{
+    try {
+        const movie = await Movie.findById(req.params.id)
+   
+        res.send({
+            success: true,
+            message: 'Movie fetched successfully',
+            data: movie
+        })
+  
+    } catch (error) {
+        res.send({
+            success: false,
+            message: error.message
+        })
+    }
+})
+
 module.exports = router 

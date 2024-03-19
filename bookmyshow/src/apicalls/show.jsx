@@ -36,3 +36,20 @@ export const getShowsByTheatre = async (payload) => {
     }
 }
 
+export const getAllTheatresByMovie = async(payload) =>{
+    try {
+        const response = await axiosInstance.post('/api/shows/get-all-theatres-by-movie',payload)
+        return response.data
+    } catch (error) {
+        return error.response
+    }
+}
+
+export const getShowById = async(payload) => {
+    try {
+        const response = await axiosInstance.post('/api/shows/get-show-by-id',payload)
+        return response.data
+    } catch (error) {
+        return error.message
+    }
+}

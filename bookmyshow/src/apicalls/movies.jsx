@@ -1,3 +1,4 @@
+
 import { axiosInstance } from "./index";
 
 
@@ -47,4 +48,15 @@ export const DeleteMovie = async(payload)=>{
         console.log(error)
     
     }
+}
+
+//Get a single movie by id
+export const getMovieById = async(id)=>{
+    try {
+        const response = await axiosInstance.get(`/api/movies/movie/${id}`)
+        console.log(response.data)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    } 
 }

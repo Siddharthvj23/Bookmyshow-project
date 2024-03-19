@@ -66,4 +66,47 @@ router.put('/update-show',async(req,res)=>{
     }
 })
 
+//get all theatres by movie which has some shows
+router.post('/get-all-theatres-by-movie',async(req,res)=>{
+    try {
+        const {movie,date} = req.body
+        const shows = await Show.find({movie,date}).populate('theatre')
+
+        let uniqueTheatres = []
+        shows.forEach(show=>{
+            let isTheatre = uniqueTheatres.find(theatre => theatre._id === show.theatre._id )
+            if(!isTheatre){
+                let showOfThisTheatre = shows.filter(showObj => showObj.theatre._id == show.theatre._id)
+                uniqueTheatres.push({...show.theatre._doc,shows: showOfThisTheatre})
+            }
+        })
+        res.send({
+            success: true,
+            message: 'All theatres fetched',
+            data: uniqueTheatres
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message: error.message
+        })
+    }
+})
+
+router.post('/get-show-by-id',async(req,res) =>{
+    try {
+        const show  = await Show.findById(req.body.showId).populate('movie').populate('theatre')
+        res.send({
+            success : true,
+            message : 'Show fetched',
+            data : show
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message: error.message
+        })
+    }
+})
+
 module.exports = router
