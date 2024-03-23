@@ -16,7 +16,8 @@ function ProtectedRoute({ children }) {
     const navitems = [
         {
             label: 'Home',
-            icon: <HomeOutlined />
+            icon: <HomeOutlined onClick={()=>{navigate('/')}}/>
+
         },
         {
             label: `${user? user.name : ""}`,
@@ -64,6 +65,7 @@ useEffect(() => {
     if (localStorage.getItem('token')) {
         getValiduser()
     } else {
+        localStorage.clear()
         navigate("/login")
     }
 }, [])

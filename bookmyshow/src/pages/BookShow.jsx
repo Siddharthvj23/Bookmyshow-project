@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { message, Card, Row, Col, Button } from 'antd'
 import moment from 'moment'
 import StripeCheckout from 'react-stripe-checkout'
+import { bookShow,makepayment } from '../apicalls/booking'
 
 const BookShow = () => {
     const { user } = useSelector((state) => state.user)
@@ -95,6 +96,41 @@ const BookShow = () => {
         );
     };
 
+    const book = async (transactionId)=>{
+        try{
+            dispatch(showloading());
+            const response = await bookShow({show: params.id, transactionId, seat: selectedSeats, user: user._id});
+            console.log(response)
+            if(response.success){
+                message.success("Show Booking done!");
+                navigate("/profile");
+            }else{
+                message.error(response.message);
+            }
+            dispatch(hideloading());
+        }catch(err){
+            message.error(err.message)
+            dispatch(hideloading());
+        }
+    
+    }
+    const onToken= async (token) =>{
+         try {
+            dispatch(showloading())
+            const response = await makepayment(token, selectedSeats.length * show.ticketprice * 100)
+            if(response.success){
+                message.success(response.message)
+                book(response.data)
+        
+            }else{
+                message.error(response.message)
+            }
+            dispatch(hideloading())
+         } catch (error) {
+            message.error(response.message)
+            dispatch(hideloading())
+         }
+    }
     useEffect(() => {
         getData()
     }, [])
@@ -136,7 +172,7 @@ const BookShow = () => {
 
                         >{getSeats()}
 
-                        {selectedSeats.length > 0 && <StripeCheckout  billingAddress amount={selectedSeats.length * show.ticketprice * 100}
+                        {selectedSeats.length > 0 && <StripeCheckout token={onToken} billingAddress amount={selectedSeats.length * show.ticketprice * 100}
                                 stripeKey='pk_test_51OwMveSCBWExgHuK92erGllMEA7uu15iZsRQPWYXYPakWfDv3hUWkwjp2hr7HQka6NYGq4lAcVRSzQe7R8V1DtGu00i4T6kyUh'>
                                 <div className=' max-w-xl mx-auto'>
                                     <Button shape='round' size='large' block>

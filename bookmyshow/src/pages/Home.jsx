@@ -39,7 +39,7 @@ function Home() {
   return (
     <>
       <div className='home-body'>
-
+      
         <Row className='Search-container'>
           <Col xs={{ span: 12 }} lg={{ span: 6 }}>
             <Input

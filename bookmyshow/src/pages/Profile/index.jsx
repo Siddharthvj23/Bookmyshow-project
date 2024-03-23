@@ -6,23 +6,23 @@ import Booking from './Booking'
 function Profile() {
   const tabitems = [
     {
-      key:'1',
-      label:'Theatres',
-      children : <TheatreList/>
+      key: '1', 
+      label: 'Booking',
+      children: <Booking />
+
     },
     {
-      key:'2',
-      label:'Booking',
-      children : <Booking/>
+      key: '2',
+      label: 'Theatres',
+      children: <TheatreList />
     }
   ]
-    return (
-      <div>
-        <h1>Profile</h1>
-        <Tabs items={tabitems}/>
+  return (
+    <div>
+      <Tabs items={tabitems} />
 
-      </div>
-    )
-  }
-  
+    </div>
+  )
+}
+
 export default Profile
