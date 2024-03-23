@@ -38,7 +38,13 @@ export const addTheatre = async(payload) =>{
 
 export const updateTheatre = async(payload)=>{
     try {
-        const response = await axiosInstance.put('/api/theatres/update-theatre',payload)
+        const response = await axiosInstance.put('/api/theatres/update-theatre', {
+            headers:{
+                "Content-Type":"application/json",
+                'authorization':`Bearer ${localStorage.getItem('token')}`
+            },
+            data: payload
+        })
         return response.data
 
     } catch (error) {

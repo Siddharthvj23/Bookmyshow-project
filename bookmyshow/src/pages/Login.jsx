@@ -3,17 +3,34 @@ import { Button, Form, Input } from 'antd'
 import { Link, useNavigate} from 'react-router-dom'
 import name from '../assets/bg-img/Book-my-show-filmy-Pass-2-696x392.jpg'
 import { message } from 'antd'
-import { LoginUser } from '../apicalls/user'
+import { GetCurrentUser, LoginUser } from '../apicalls/user'
 import 'animate.css'
+import { useDispatch } from 'react-redux'
+import { hideloading, showloading } from '../redux/loaderSlice'
+import { setUser } from '../redux/userSlice'
 
 
 function Login() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const getValiduser = async () => {
+        try {
+            dispatch(showloading())
+            const response = await GetCurrentUser()
+            // console.log(response)
+            dispatch(setUser(response.data))
+            dispatch(hideloading())
+        } catch (error) {
+            dispatch(setUser(null))
+            message.error(error.message)
+        }
+    }
     const onFinish = async(values)=>{
     
         try {
             const response = await LoginUser(values)
             if (response.success) {
+                getValiduser()
                 message.success(response.message)
                 localStorage.setItem('token',response.token)
                 navigate('/')

@@ -21,7 +21,12 @@ export const bookShow = async (payload) => {
 
 export const getAllBookings = async () => {
     try{
-        const response = await axiosInstance.get('/api/bookings/get-all-bookings');
+        const response = await axiosInstance.get('/api/bookings/get-all-bookings', {
+            headers:{
+                "Content-Type":"application/json",
+                'authorization':`Bearer ${localStorage.getItem('token')}`
+            }
+        });
         return response.data;
     }catch(err){
         return err.response;
