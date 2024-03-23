@@ -56,10 +56,10 @@ const BookShow = () => {
                             let seatClass = 'seat-btn'
 
                             if (selectedSeats.includes(seatNumber)) {
-                                seatClass += 'selected'
+                                seatClass += ' selected'
                             }
                             if (show.bookedSeats.includes(seatNumber)) {
-                                seatClass += 'booked'
+                                seatClass += ' booked'
                             }
 
                             if (seatNumber <= TotalSeats)
