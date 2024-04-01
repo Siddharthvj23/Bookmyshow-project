@@ -38,7 +38,7 @@ const booking = () => {
             return <Col key={booking.id} xs={{ span: 24 }} lg={{ span: 112 }}>
               <Card className='booking-inner-card'>
                 <div>
-                  <div><img src={booking.show.movie.poster} width={100} alt='Movie Poster' /></div>
+                  {/* <div><img src={booking.show.movie.poster} width={100} alt='Movie Poster' /></div> */}
                   <div>
                     <p>Theatre: <b>{booking.show.theatre.name}</b></p>
                     <p>Seats: <b>{booking.seats.join(", ")}</b></p>

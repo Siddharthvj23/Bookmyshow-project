@@ -57,14 +57,14 @@ function Home() {
             ).map((movie) => (
               <Col
                 key={movie._id}>
-                <div>
+                <div className='Movie-card'>
                   <img
                     onClick={() => {
                       navigate(`/movie/${movie._id}?date=${moment().format("YYYY-MM-DD")}`)
                     }}
                     src={movie.poster}
                     alt='Movie Poster'
-                    width={200}
+                
                     style={{ borderRadius: "8px" }} />
                   <h3
                     onClick={() => {

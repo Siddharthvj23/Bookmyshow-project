@@ -74,7 +74,7 @@ function Login() {
                                 placeholder='Enter your password'></Input>
                             </Form.Item>
                             <Form.Item>
-                                <Button type='primary'
+                                <Button className='btn'
                                 htmlType='submit'
                                 style={{fontSize:'1rem',fontWeight:'600', width:'10rem'
                                 }}>Login</Button>

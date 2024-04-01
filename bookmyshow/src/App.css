@@ -4,7 +4,7 @@
 
 .home-body {
     background-color: red;
-    height: 93vh;
+    height: auto;
 }
 
 .Search-container {
@@ -15,23 +15,31 @@
 }
 
 .Movie-container {
-    display: flex;
-    padding: 20px;
-    gap: 200px;
-}
+padding: 40px;
 
+gap: 172px;
+}
+.Movie-card{
+    display: flex;
+    height: 35vh;
+    width: 225px;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    
+}
 .Movie-container:hover {
 
     cursor: pointer;
 
 }
 
-.Movie-title-container {
+/* .Movie-title-container {
     display: flex;
     cursor: pointer;
     justify-content: center;
     padding: 5px;
-}
+} */
 
 .Movie-inner-container {
 
@@ -282,7 +290,9 @@
     font-weight: 1000;
     color: #555;
 }
-
+.btn{
+    background-color: #1677ff;
+}
 @media screen and (min-width: 768px) {
     .site-layout {
         padding: 0 50px;
