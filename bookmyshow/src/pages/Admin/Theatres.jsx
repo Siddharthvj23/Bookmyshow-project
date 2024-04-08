@@ -34,7 +34,7 @@ const TheatresTable = ()=> {
       dispatch(showloading())
       let values = {...theatres,theatreId: theatre._id, isActive: !theatre.isActive}
       const response = await updateTheatre(values)
-      console.log(response, theatre);
+      // console.log(response, theatre);
       if(response.success){
         message.success(response.message)
         getData()
@@ -46,7 +46,7 @@ const TheatresTable = ()=> {
       
     }
   }
-  console.log(handleStatusChange)
+
   const columns = [
     {
       title: 'Name',

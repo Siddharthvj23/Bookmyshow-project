@@ -41,7 +41,7 @@ export const updateTheatre = async(payload)=>{
         const response = await axiosInstance.put('/api/theatres/update-theatre', {
             headers:{
                 "Content-Type":"application/json",
-                'authorization':`Bearer ${localStorage.getItem('token')}`
+                Authorization:`Bearer ${localStorage.getItem('token')}`
             },
             data: payload
         })
