@@ -12,12 +12,12 @@ router.post('/make-payment',async(req,res)=>{
             source : token.id
         })
 
-        const paymentIntent = await stripe.paymentIntent.create({
+        const paymentIntent = await stripe.paymentIntents.create({
             amount: amount,
             currency: 'usd',
             customer: customer.id,
             payment_method_types : ["card"],
-            receipts_email : token.email,
+            receipt_email : token.email,
             description : "Token has been assigned to thhe movie"
         })
         const transactionId = paymentIntent.id
@@ -41,6 +41,7 @@ router.post('/book-show',async(req,res)=>{
         await newBooking.save()
 
         const show = await Show.findById(req.body.show).populate("movie")
+        console.log(req.body.seats)
         const updatedBookedSeats = [...show.bookedSeats,...req.body.seats]
         await Show.findByIdAndUpdate(req.body.show,{bookedSeats: updatedBookedSeats})
         res.send({

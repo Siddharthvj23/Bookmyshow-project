@@ -38,9 +38,9 @@ const booking = () => {
             return <Col key={booking.id} xs={{ span: 24 }} lg={{ span: 112 }}>
               <Card className='booking-inner-card'>
                 <div>
-                  {/* <div><img src={booking.show.movie.poster} width={100} alt='Movie Poster' /></div> */}
+                  <div><img src={booking.show.movie?.poster} width={100} alt='Movie Poster' /></div>
                   <div>
-                    <p>Theatre: <b>{booking.show.theatre.name}</b></p>
+                    <p>Theatre: <b>{booking.show.theatre?.name}</b></p>
                     <p>Seats: <b>{booking.seats.join(", ")}</b></p>
                     <p>Date & Time: <b>{moment(booking.show.date).format("MMM Do YYYY")} {moment(booking.show.time, "HH:mm").format("hh:mm A")}</b>  </p>
                     <p>Amount: <b>Rs.{booking.show.bookedSeats.length * booking.show.ticketprice}/- </b></p>

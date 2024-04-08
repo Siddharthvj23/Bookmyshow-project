@@ -17,12 +17,13 @@ function Login() {
         try {
             dispatch(showloading())
             const response = await GetCurrentUser()
-            // console.log(response)
+
+            console.log(response)
             dispatch(setUser(response.data))
             dispatch(hideloading())
         } catch (error) {
             dispatch(setUser(null))
-            message.error(error.message)
+
         }
     }
     const onFinish = async(values)=>{
@@ -30,9 +31,9 @@ function Login() {
         try {
             const response = await LoginUser(values)
             if (response.success) {
-                getValiduser()
+                localStorage.setItem('token', response.token)
+                // getValiduser()
                 message.success(response.message)
-                localStorage.setItem('token',response.token)
                 navigate('/')
             } else {
                 message.error(response.message)

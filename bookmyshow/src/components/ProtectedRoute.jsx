@@ -69,7 +69,7 @@ function ProtectedRoute({ children }) {
       try {
         dispatch(showloading());
         GetCurrentUser().then((response) => {
-          dispatch(setUser(response.data));
+          dispatch(setUser(response.data.data));
           dispatch(hideloading());
         });
         // console.log(response)

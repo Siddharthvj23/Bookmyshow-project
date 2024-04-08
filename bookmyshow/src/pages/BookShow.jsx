@@ -99,7 +99,7 @@ const BookShow = () => {
     const book = async (transactionId)=>{
         try{
             dispatch(showloading());
-            const response = await bookShow({show: params.id, transactionId, seat: selectedSeats, user: user._id});
+            const response = await bookShow({show: params.id, transactionId, seats: selectedSeats, user: user._id});
             console.log(response)
             if(response.success){
                 message.success("Show Booking done!");
