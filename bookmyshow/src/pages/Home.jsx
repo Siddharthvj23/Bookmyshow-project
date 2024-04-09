@@ -57,7 +57,7 @@ function Home() {
             ).map((movie) => (
               <Col
                 key={movie._id}>
-                <div className='Movie-card'>
+                <div className='Movie-card '>
                   <img
                     onClick={() => {
                       navigate(`/movie/${movie._id}?date=${moment().format("YYYY-MM-DD")}`)

@@ -217,9 +217,9 @@ function MovieForm({ isModalOpen, setisModalOpen, selectedMovie, setSelectedMovi
                     <Form.Item>
                         <Button
                             block
-                            type='primary'
+                          
                             htmlType='submit'
-                            style={{ fontSize: '1rem', fontWeight: "600" }}
+                            style={{ fontSize: '1rem', fontWeight: "600", backgroundColor: '#1677ff'}}
                         >
                             Submit the Data
                         </Button>

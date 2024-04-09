@@ -62,10 +62,12 @@ function Register() {
                                         placeholder='Enter your password'></Input>
                                 </Form.Item>
                                 <Form.Item>
-                                    <Button type='primary'
+                                    <Button 
+                                      
                                         htmlType='submit'
                                         style={{
-                                            fontSize: '1rem', fontWeight: '600', width: '10rem'
+                                            fontSize: '1rem', fontWeight: '600', width: '10rem',
+                                            backgroundColor:'#1677ff'
                                         }}
                                     >Sign Up</Button>
                                 </Form.Item>

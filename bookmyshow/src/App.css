@@ -15,7 +15,7 @@
 }
 
 .Movie-container {
-/* padding: 40px; */
+padding-left: 20px;
 
 gap: 172px;
 }
@@ -26,6 +26,7 @@ gap: 172px;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+    padding-left: 10px;
     
 }
 .Movie-container:hover {
@@ -290,11 +291,25 @@ gap: 172px;
     font-weight: 1000;
     color: #555;
 }
-.btn{
-    background-color: #1677ff;
-}
-/* @media screen and (min-width: 768px) {
-    .site-layout {
+
+/* @media screen and (min-width: 1939px) {
+    .home-body{
+        /* padding: 20px; */
+        /* height: 100vh;
+    }
+    .Movie-container{
+        padding: 30px;
+        row-gap: 50px;
+        column-gap: 10px;
+        justify-content: space-between;
+    }
+    .Movie-card{
+        height: 10vh;
+        width: 100px;
+        column-gap: 50px;
+        row-gap: 50px;
+    } */
+    /* .site-layout {
         padding: 0 50px;
     }
 
@@ -304,32 +319,11 @@ gap: 172px;
 
     .main-area.mw-500 {
         width: 500px;
-    }
-}
+    } */
+/* }  */
 
-@media screen and (max-width: 767px) {
-    .mt-3-mob {
-        margin-top: 1rem;
-    }
-
-    .mt-8px-mob {
-        margin-top: 8px;
-    }
-
-    .ant-layout-header {
-        padding-inline: 10px;
-    }
-
-    .flex-column-mob {
-        flex-direction: column;
-    }
-
-    .single-movie-div {
-        flex-direction: column;
-    }
-
-    .single-movie-img {
-        margin-right: 0;
-        margin-bottom: 1rem;
+/* @media screen and (max-width: 678px) {
+    .home-body{
+        min-height: 100vh;
     }
 } */
