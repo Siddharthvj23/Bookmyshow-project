@@ -21,13 +21,17 @@ gap: 172px;
 }
 .Movie-card{
     display: flex;
-    height: 35vh;
+    height: 320px;
     width: 225px;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
     padding-left: 10px;
     
+}
+.Movie-card img{
+    height: 100%;
+    width: 100%;
 }
 .Movie-container:hover {
 
@@ -51,7 +55,7 @@ gap: 172px;
     display: flex;
     justify-content: center;
     flex-shrink: 0;
-    width: 100vw;
+    width: 99vw;
 }
 
 .Movie-inner-container-data {
@@ -59,14 +63,34 @@ gap: 172px;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    justify-content: center;
+    padding-top: 10px;
 
 }
+/* .movie-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+} */
+.date-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
 .theatre-wrapper {
     margin-top: 1rem;
     padding-top: 1rem;
 }
-
+.theatre-wrapper h2{
+    font-size: x-large;
+}
+.show-ul{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
 .show-ul li {
     padding: 0.75rem 1rem;
     border: 2px solid #bbb;
@@ -272,7 +296,11 @@ gap: 172px;
     font-weight: 500;
     font-size: 20px;
 }
-
+.pay-btn{
+    max-width: 36rem;
+    margin-left: 36% ;
+    margin-right: 10%;
+}
 .d-block {
     display: block;
 }

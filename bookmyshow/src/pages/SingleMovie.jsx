@@ -88,7 +88,7 @@ const SingleMovie = () => {
                         </p>
                         <hr />
 
-                        <div >
+                        <div className='date-container'>
                             <label >Choose the date:</label>
                             <Input
                                 onChange={handleDate}
@@ -109,7 +109,7 @@ const SingleMovie = () => {
             )}
             {theatres.length > 0 &&(
                 <div className='theatre-wrapper'>
-                    <h2>Theatres</h2>
+                    <h2>Theatres :</h2>
                     {theatres.map((theatre)=>{
                         return(
                             <div key={theatre._id}>
