@@ -247,7 +247,7 @@ gap: 172px;
     color: #fff;
 }
 
-.seat-ul.seat-btn.booked{
+.seat-ul .seat-btn.booked{
     background-color: #ddd;
     color:#999;
     border-color: #ddd;
