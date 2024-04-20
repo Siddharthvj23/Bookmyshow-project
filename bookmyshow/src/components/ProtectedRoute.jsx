@@ -78,7 +78,8 @@ function ProtectedRoute({ children }) {
         message.error(error.message);
       }
     } else {
-      localStorage.removeItem("token");
+      localStorage.clear()
+      // localStorage.removeItem("token");
       navigate("/login");
     }
   }, [dispatch, navigate]);
