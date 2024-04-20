@@ -2,9 +2,9 @@ import { axiosInstance } from "./index";
 
 
 //get all theatres to admin
-export const getAllTheatresToAdmin = async(payload)=>{
+export const getAllTheatresToAdmin = async () => {
     try {
-        const response =  await axiosInstance.get('/api/theatres/get-all-theatres',payload)
+        const response = await axiosInstance.get('/api/theatres/get-all-theatres')
         return response.data
     } catch (error) {
         return error.response
@@ -12,9 +12,9 @@ export const getAllTheatresToAdmin = async(payload)=>{
 }
 
 //get all theatres of a specific owner
-export  const getAllTheatres = async(payload) =>{
+export const getAllTheatres = async (payload) => {
     try {
-        const response = await axiosInstance.post('/api/theatres/get-all-theatres-by-owner',payload)
+        const response = await axiosInstance.post('/api/theatres/get-all-theatres-by-owner', payload)
         return response.data
     } catch (error) {
         return error.response
@@ -24,43 +24,43 @@ export  const getAllTheatres = async(payload) =>{
 
 //add theatre
 
-export const addTheatre = async(payload) =>{
+export const addTheatre = async (payload) => {
     try {
-        const response = await axiosInstance.post('/api/theatres/add-theatre',payload)
+        const response = await axiosInstance.post('/api/theatres/add-theatre', payload)
         return response.data
     } catch (error) {
         console.log(error)
-        
+
     }
 }
 
 //updated theatre
 
-export const updateTheatre = async(payload)=>{
+export const updateTheatre = async (payload) => {
     try {
-        const response = await axiosInstance.put('/api/theatres/update-theatre', {
-            headers:{
-                "Content-Type":"application/json",
-                Authorization:`Bearer ${localStorage.getItem('token')}`
+        const response = await axiosInstance.put('/api/theatres/update-theatre', payload, {
+            headers: {
+                "Content-Type": "application/json",
+                'authorization': `Bearer ${localStorage.getItem('token')}`
+
             },
-            data: payload
         })
         return response.data
 
     } catch (error) {
         console.log(error)
-        
+
     }
 }
 
 //Delete theatre
 
-export const deleteTheatre = async(payload)=>{
+export const deleteTheatre = async (payload) => {
     try {
-        const response = await axiosInstance.delete('/api/theatres/deleteTheatre',{data:payload})
+        const response = await axiosInstance.delete('/api/theatres/deleteTheatre', { data: payload })
         return response.data
     } catch (error) {
         console.log(error)
-        
+
     }
 }
