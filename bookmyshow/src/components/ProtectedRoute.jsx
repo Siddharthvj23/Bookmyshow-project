@@ -64,22 +64,31 @@ function ProtectedRoute({ children }) {
     },
   ];
 
+  const handleUser = async () => {
+    try {
+      // If token is present, try to fetch user data
+      const response = await GetCurrentUser();
+      console.log("get user success")
+      // If token is valid, set user data in Redux state
+      dispatch(setUser(response.data.data));
+    } catch (error) {
+      console.log("get user failure",error)
+      // Redux State Clear
+      dispatch(setUser(null));
+      // LocalStorage Clear
+      localStorage.removeItem("token");
+      // Redirect to Login Page
+      navigate("/login");
+      // Show Error Message on top (Notification)
+      message.error(error.response.data.message);
+      
+    }
+  }
+  
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      try {
-        dispatch(showloading());
-        GetCurrentUser().then((response) => {
-          dispatch(setUser(response.data.data));
-          dispatch(hideloading());
-        });
-        // console.log(response)
-      } catch (error) {
-        dispatch(setUser(null));
-        message.error(error.message);
-      }
+      handleUser();
     } else {
-      localStorage.clear()
-      // localStorage.removeItem("token");
       navigate("/login");
     }
   }, [dispatch, navigate]);
