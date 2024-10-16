@@ -1,0 +1,13 @@
+{
+  "name": "bookmyshow-project",
+  "version": "1.0.0",
+  "description": "This is a clone of the popular movie and event booking platform BookMyShow. It includes features like browsing movies, booking tickets, and managing events. \r where you first render to Login Page if we are a new User, we need to first Register then go back to login Page,After Login you will be render to Home page \r were we can available movies Listed on Bookmyshow and we can select any Movie and Book a show as per our convience and Select Seats after you",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd ./server && npm install && cd .. && cd bookmyshow && npm install && npm run build",
+    "start": "cd ./server && npm run start"
+  },
+  "author": "",
+  "license": "ISC"
+}

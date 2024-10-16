@@ -14,6 +14,7 @@ const showRoutes = require('./routes/showRoutes')
 const bookingRoutes = require('./routes/bookingRoutes')
 
 app.use(express.json())
+app.use(express.static('../bookmyshow/dist'))
 app.use('/api/users',userRoutes)
 app.use('/api/movies',movieRoutes)
 app.use('/api/theatres',theatreRoutes)
