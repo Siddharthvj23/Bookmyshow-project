@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
 import { Link, useNavigate} from 'react-router-dom'
-import name from '../assets/bg-img/Book-my-show-filmy-Pass-2-696x392.jpg'
+import name from '../assets/bg-img/Login-Img2.jpg'
 import { message } from 'antd'
 import { GetCurrentUser, LoginUser } from '../apicalls/user'
 import 'animate.css'
@@ -46,7 +46,7 @@ function Login() {
     return (
         <div className='bg-img'>
             <img src={name} alt="" className='formImg' />
-            <div className='App-header'>
+            <div className='Login-box'>
                 <header>
                 <main>
                     <section className='left-section'>
@@ -77,15 +77,15 @@ function Login() {
                             <Form.Item>
                                 <Button 
                                 htmlType='submit'
-                                style={{fontSize:'1rem',fontWeight:'600', width:'10rem' , backgroundColor:'#1677ff'
+                                style={{fontSize:'1rem',fontWeight:'600', width:'10rem' , backgroundColor:'#d5253a',color:'white'
                                 }}>Login</Button>
                             </Form.Item>
                         </Form>
                         <div>
-                            <p className=' text-link'>
-                              New User? <Link to='/Register'>Register Here</Link>
-                            </p>
-                        </div>
+                                <p className='text-link'>
+                                    New User? <Link to='/Register' >Register Now</Link>
+                                </p>
+                            </div>
 
 
 

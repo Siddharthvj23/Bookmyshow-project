@@ -15,11 +15,12 @@
 }
 
 .Movie-container {
-/* padding-left: 20px; */
-padding: 20px;
-gap: 172px;
+    /* padding-left: 20px; */
+    padding: 20px;
+    gap: 172px;
 }
-.Movie-card{
+
+.Movie-card {
     display: flex;
     height: 320px;
     width: 225px;
@@ -27,12 +28,14 @@ gap: 172px;
     justify-content: space-between;
     flex-direction: column;
     padding-left: 10px;
-    
+
 }
-.Movie-card img{
+
+.Movie-card img {
     height: 100%;
     width: 100%;
 }
+
 .Movie-container:hover {
 
     cursor: pointer;
@@ -67,30 +70,35 @@ gap: 172px;
     padding-top: 10px;
 
 }
+
 /* .movie-title{
     display: flex;
     align-items: center;
     justify-content: center;
 
 } */
-.date-container{
+.date-container {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     gap: 10px;
 }
+
 .theatre-wrapper {
     margin-top: 1rem;
     padding-top: 1rem;
 }
-.theatre-wrapper h2{
+
+.theatre-wrapper h2 {
     font-size: x-large;
 }
-.show-ul{
+
+.show-ul {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
+
 .show-ul li {
     padding: 0.75rem 1rem;
     border: 2px solid #bbb;
@@ -106,14 +114,14 @@ gap: 172px;
     background-color: orange;
     border-color: transparent;
 }
-
-.bg-img {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-
-    height: 100vh;
-    /* gap: 25px; */
-
+.formImg{
+   background-size: cover;
+   background-position: center;
+    background-repeat: no-repeat;
+   width: 100%;
+   height: 100vh; 
+   /* filter: blur(3px);
+    -webkit-filter: blur(4px); */
 }
 
 .pt-3 {
@@ -124,31 +132,61 @@ gap: 172px;
     color: #1890ff;
 }
 
-.formImg {
-    height: 100%;
-    width: 100%;
-
-}
-
-.App-header {
+.Login-box {
+    background-color: rgb(235, 194, 194);
+    color: black;
+    font-weight: bold;
+    /* border: 3px solid rgb(66, 64, 64); */
+    border-radius: 1.5rem;
+    position: absolute;
+    left: 40%;
+    right: 40%;
+    top: 25%;
     min-width: 300px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: x-large;
     text-align: center;
-    min-height: 100vh;
+    min-height: 40vh;
     padding: 20px;
+
+}
+
+.Register-box {
+    background-color: white;
+    /* opacity: 0.6; */
+    color: black;
+    font-weight: bold;
+    /* border: 3px solid rgb(66, 64, 64); */
+    border-radius: 1.5rem;
+    position: absolute;
+    left: 10%;
+    /* right: 40%; */
+    top: 20%;
+    min-width: 300px;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    text-align: center;
+    min-height: 40vh;
+    padding: 20px;
+    /* filter: blur(3px);
+    -webkit-filter: blur(4px); */
 }
 
 .left-section {
     padding-top: 12px;
     padding-bottom: 12px;
+    background-color: rgb(0, 0, 0,0);
+    font-weight:900;
 }
 
 .right-section {
+
     display: block;
+    background-color: rgb(0, 0, 0,0);
+    font-weight:900;
+    
 }
 
 .text-link {
@@ -156,8 +194,8 @@ gap: 172px;
     line-height: 20px;
 }
 
-.text-link>* {
-    background-color: rgb(14, 165, 233);
+.text-link>*:hover {
+    background-color: #3498db;
 }
 
 .loader-container {
@@ -271,12 +309,13 @@ gap: 172px;
     color: #fff;
 }
 
-.seat-ul .seat-btn.booked{
+.seat-ul .seat-btn.booked {
     background-color: #ddd;
-    color:#999;
+    color: #999;
     border-color: #ddd;
-    cursor:not-allowed;
-  }
+    cursor: not-allowed;
+}
+
 .bottom-card {
     display: flex;
     justify-content: space-between;
@@ -296,11 +335,13 @@ gap: 172px;
     font-weight: 500;
     font-size: 20px;
 }
-.pay-btn{
+
+.pay-btn {
     max-width: 36rem;
-    margin-left: 36% ;
+    margin-left: 36%;
     margin-right: 10%;
 }
+
 .d-block {
     display: block;
 }
@@ -323,7 +364,7 @@ gap: 172px;
 /* @media screen and (min-width: 1939px) {
     .home-body{
         /* padding: 20px; */
-        /* height: 100vh;
+/* height: 100vh;
     }
     .Movie-container{
         padding: 30px;
@@ -337,7 +378,7 @@ gap: 172px;
         column-gap: 50px;
         row-gap: 50px;
     } */
-    /* .site-layout {
+/* .site-layout {
         padding: 0 50px;
     }
 

@@ -3,16 +3,18 @@ import { Button, Form, Input, message,Radio} from 'antd'
 import { Link } from 'react-router-dom'
 import { RegisterUser } from '../apicalls/user'
 import 'animate.css'
-
-import name from '../assets/bg-img/BookMyShow-Wiki-2048x1152.png'
+import { useNavigate } from 'react-router-dom'
+import name from '../assets/bg-img/Register-Img.jpg'
 
 function Register() {
+    const navigate = useNavigate()
     const onFinish = async (value) => {
         console.log(value)
         try {
             const response = await RegisterUser(value)
             if (response.success) {
                 message.success(response.message)
+                navigate('/Login')
             } else {
                 message.error(response.message)
             }
@@ -24,7 +26,8 @@ function Register() {
     return (
         <div className='bg-img'>
             <img src={name} alt="" className='formImg'/>
-            <div className='App-header'>
+            <div className='Register-box'>
+                <div>
                 <header>
                     <main>
                         <section className='left-section'>
@@ -40,6 +43,7 @@ function Register() {
                                     <Input id='name'
                                         type='text'
                                         placeholder='Enter your name'
+                                        style={{border:'2px solid black',borderRadius:'1.5rem'}}
                                         rules={[{ required: true, message: "Email is required!" }]}></Input>
                                 </Form.Item>
                                 <Form.Item
@@ -49,7 +53,9 @@ function Register() {
                                     rules={[{ required: true, message: 'Email is required' }]}>
                                     <Input id='email'
                                         type='text'
-                                        placeholder='Enter your email'></Input>
+                                        placeholder='Enter your email'
+                                        style={{border:'2px solid black',borderRadius:'1.5rem'}}></Input>
+                                        
 
                                 </Form.Item>
                                 <Form.Item label='Password:'
@@ -59,7 +65,8 @@ function Register() {
                                     rules={[{ required: true, message: 'password is required' }]}>
                                     <Input id='password'
                                         type='password'
-                                        placeholder='Enter your password'></Input>
+                                        placeholder='Enter your password'
+                                        style={{border:'2px solid black',borderRadius:'1.5rem'}}></Input>
                                 </Form.Item>
                                 <Form.Item>
                                     <Button 
@@ -67,8 +74,9 @@ function Register() {
                                         htmlType='submit'
                                         style={{
                                             fontSize: '1rem', fontWeight: '600', width: '10rem',
-                                            backgroundColor:'#1677ff'
+                                            backgroundColor:'black',color:'white'
                                         }}
+                            
                                     >Sign Up</Button>
                                 </Form.Item>
                             </Form>
@@ -82,7 +90,7 @@ function Register() {
 
                         </section>
                     </main>
-                </header>
+                </header></div>
             </div>
         </div>
     )
